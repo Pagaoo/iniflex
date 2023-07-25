@@ -1,4 +1,5 @@
 import model.Funcionario;
+import model.Pessoa;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -19,7 +20,7 @@ public class Main {
         funcionarios.add(new Funcionario("Heitor", LocalDate.of(1999,11,19), "Operador", new BigDecimal("1582.72")));
         funcionarios.add(new Funcionario("Arthur", LocalDate.of(1993,3,31), "Contador", new BigDecimal("4071.84")));
         funcionarios.add(new Funcionario("Laura", LocalDate.of(1994,7,8), "Gerente", new BigDecimal("3017.45")));
-        funcionarios.add(new Funcionario("Heitor", LocalDate.of(2003,5,24), "Eletricista", new BigDecimal("1606.85")));
+        funcionarios.add(new Funcionario("Heloísa", LocalDate.of(2003,5,24), "Eletricista", new BigDecimal("1606.85")));
         funcionarios.add(new Funcionario("Helena", LocalDate.of(1996,9,2), "Gerente", new BigDecimal("2799.93")));
         System.out.println("----------------Funcionarios cadastrados----------------");
         mostraFuncionarios(funcionarios);
@@ -36,6 +37,10 @@ public class Main {
         System.out.println("----------------funcionario com a maior idade----------------");
         Funcionario funcionarioMaiorIdade = funcionarioMaiorIdade(funcionarios);
         System.out.println("Nome: " + funcionarioMaiorIdade.getNome() + ", Idade: " + calcularIdade(funcionarioMaiorIdade.getDataNascimento()) + " anos");
+        System.out.println("----------------funcionario cadastrados em ordem alfábetica----------------");
+        List<Funcionario> funcionariosOrdenados = ordenarLista(funcionarios);
+        mostraFuncionarios(funcionariosOrdenados);
+
     }
 
     private static void mostraFuncionarios(List<Funcionario> funcionarios) {
@@ -119,5 +124,10 @@ public class Main {
         LocalDate dataAtual = LocalDate.now();
         Period periodo = Period.between(dataNascimento, dataAtual);
         return periodo.getYears();
+    }
+
+    private static List<Funcionario> ordenarLista(List<Funcionario> funcionarios) {
+        funcionarios.sort(Comparator.comparing(Pessoa::getNome));
+        return funcionarios;
     }
 }
