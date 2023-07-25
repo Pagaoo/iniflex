@@ -3,12 +3,14 @@ import model.Funcionario;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
         List<Funcionario> funcionarios = new ArrayList<>();
+        LocalDate dataAtual = LocalDate.now();
         funcionarios.add(new Funcionario("Maria", LocalDate.of(2000,10,18), "Operador", new BigDecimal("2099.44")));
         funcionarios.add(new Funcionario("João", LocalDate.of(1990,5,12), "Operador", new BigDecimal("2284.38")));
         funcionarios.add(new Funcionario("Caio", LocalDate.of(1961,5,2), "Coordenador", new BigDecimal("9836.14")));
@@ -31,6 +33,9 @@ public class Main {
         System.out.println("----------------funcionarios com aniversário nos mês 10 e 12----------------");
         List<Funcionario> aniversariantes = Aniversariantes(funcionarios, 10,12);
         mostraFuncionarios(aniversariantes);
+        System.out.println("----------------funcionario com a maior idade----------------");
+        Funcionario funcionarioMaiorIdade = funcionarioMaiorIdade(funcionarios);
+        System.out.println("Nome: " + funcionarioMaiorIdade.getNome() + ", Idade: " + calcularIdade(funcionarioMaiorIdade.getDataNascimento()) + " anos");
     }
 
     private static void mostraFuncionarios(List<Funcionario> funcionarios) {
@@ -96,5 +101,23 @@ public class Main {
             }
         }
         return aniversariantes;
+    }
+
+    private static Funcionario funcionarioMaiorIdade(List<Funcionario> funcionarios) {
+        Funcionario funcionarioMaiorIdade = null;
+
+        for (Funcionario funcionario: funcionarios) {
+            LocalDate dataNascimento = funcionario.getDataNascimento();
+            if (funcionarioMaiorIdade == null || dataNascimento.isBefore(funcionarioMaiorIdade.getDataNascimento())) {
+                funcionarioMaiorIdade = funcionario;
+            }
+        }
+        return funcionarioMaiorIdade;
+    }
+
+    private static int calcularIdade(LocalDate dataNascimento) {
+        LocalDate dataAtual = LocalDate.now();
+        Period periodo = Period.between(dataNascimento, dataAtual);
+        return periodo.getYears();
     }
 }
