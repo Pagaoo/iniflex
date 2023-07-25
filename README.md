@@ -24,15 +24,3 @@ Diante disso, você deve desenvolver um projeto java, com os seguintes requisito
 3.10 – Imprimir a lista de funcionários por ordem alfabética.
 3.11 – Imprimir o total dos salários dos funcionários.
 3.12 – Imprimir quantos salários mínimos ganha cada funcionário, considerando que o salário mínimo é R$1212.00.
-
-Orientações gerais:
-• você poderá utilizar a ferramenta que tem maior domínio (exemplos: eclipse, netbeans etc);
-• após finalizado o desenvolvimento, exportar o projeto e encaminhar o link do seu teste aqui mesmo na etapa Mão na Massa 🖐.
-Basta Colar o link ainda aqui nessa etapa.
-• Assim que recebermos seu projeto desenvolvido, será agendada uma entrevista com nosso time técnico para avaliação.
-
-Esperamos que você use todo seu conhecimento e criatividade nesse teste.
-
-Caso você não souber resolver determinado requisito comente no código que aquele item você não sabe como desenvolver, e vá para o próximo. Avaliaremos o que você conseguiu desenvolver e como foi desenvolvido.
-
-Boa sorte!
