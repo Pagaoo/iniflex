@@ -12,7 +12,6 @@ public class Main {
     public static void main(String[] args) {
 
         List<Funcionario> funcionarios = new ArrayList<>();
-        LocalDate dataAtual = LocalDate.now();
         funcionarios.add(new Funcionario("Maria", LocalDate.of(2000,10,18), "Operador", new BigDecimal("2099.44")));
         funcionarios.add(new Funcionario("João", LocalDate.of(1990,5,12), "Operador", new BigDecimal("2284.38")));
         funcionarios.add(new Funcionario("Caio", LocalDate.of(1961,5,2), "Coordenador", new BigDecimal("9836.14")));
