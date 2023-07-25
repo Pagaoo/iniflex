@@ -3,6 +3,7 @@ import model.Pessoa;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -22,25 +23,28 @@ public class Main {
         funcionarios.add(new Funcionario("Laura", LocalDate.of(1994,7,8), "Gerente", new BigDecimal("3017.45")));
         funcionarios.add(new Funcionario("Heloísa", LocalDate.of(2003,5,24), "Eletricista", new BigDecimal("1606.85")));
         funcionarios.add(new Funcionario("Helena", LocalDate.of(1996,9,2), "Gerente", new BigDecimal("2799.93")));
-        System.out.println("----------------Funcionarios cadastrados----------------");
+        System.out.println("----------------Imprimir todos os funcionários com todas suas informações, informação de data deve ser exibido no formato dd/mm/aaaa----------------");
         mostraFuncionarios(funcionarios);
-        System.out.println("----------------Remover João----------------");
+        System.out.println("----------------Remover o funcionário “João” da lista---------------");
         removerFuncionario(funcionarios, "João");
         mostraFuncionarios(funcionarios);
-        System.out.println("----------------Salarios atualizados----------------");
+        System.out.println("----------------Os funcionários receberam 10% de aumento de salário, atualizar a lista de funcionários com novo valor----------------");
         calcularAumento(funcionarios);
-        System.out.println("----------------funcionarios agrupados por cargo----------------");
+        System.out.println("----------------Imprimir os funcionários, agrupados por função----------------");
         mostrarFuncionariosPorCargos(agruparPorFuncao(funcionarios));
-        System.out.println("----------------funcionarios com aniversário nos mês 10 e 12----------------");
+        System.out.println("----------------Imprimir os funcionários que fazem aniversário no mês 10 e 12----------------");
         List<Funcionario> aniversariantes = Aniversariantes(funcionarios, 10,12);
         mostraFuncionarios(aniversariantes);
-        System.out.println("----------------funcionario com a maior idade----------------");
+        System.out.println("----------------Imprimir o funcionário com a maior idade, exibir os atributos: nome e idade----------------");
         Funcionario funcionarioMaiorIdade = funcionarioMaiorIdade(funcionarios);
         System.out.println("Nome: " + funcionarioMaiorIdade.getNome() + ", Idade: " + calcularIdade(funcionarioMaiorIdade.getDataNascimento()) + " anos");
-        System.out.println("----------------funcionario cadastrados em ordem alfábetica----------------");
+        System.out.println("----------------Imprimir a lista de funcionários por ordem alfabética----------------");
         List<Funcionario> funcionariosOrdenados = ordenarLista(funcionarios);
         mostraFuncionarios(funcionariosOrdenados);
-
+        System.out.println("----------------Imprimir o total dos salários dos funcionários----------------");
+        System.out.println(somarSalarios(funcionarios));
+        System.out.println("---------------- Imprimir quantos salários mínimos ganha cada funcionário, considerando que o salário mínimo é R$1212.00----------------");
+        quantidadeSalariosMinimos(funcionarios, BigDecimal.valueOf(1212.00));
     }
 
     private static void mostraFuncionarios(List<Funcionario> funcionarios) {
@@ -129,5 +133,21 @@ public class Main {
     private static List<Funcionario> ordenarLista(List<Funcionario> funcionarios) {
         funcionarios.sort(Comparator.comparing(Pessoa::getNome));
         return funcionarios;
+    }
+
+    private static BigDecimal somarSalarios(List<Funcionario> funcionarios) {
+        BigDecimal somaSalarios = BigDecimal.ZERO;
+        for (Funcionario funcionario : funcionarios) {
+            somaSalarios = somaSalarios.add(funcionario.getSalario());
+        }
+        return somaSalarios.setScale(2, RoundingMode.UP);
+    }
+
+    private static void quantidadeSalariosMinimos(List<Funcionario> funcionarios, BigDecimal salarioMinimo) {
+        for (Funcionario funcionario: funcionarios) {
+            BigDecimal salario = funcionario.getSalario();
+            BigDecimal qtdSalarioMinimo = salario.divide(salarioMinimo, 2, RoundingMode.UP);
+            System.out.println(funcionario.getNome() + " ganha " + qtdSalarioMinimo + " de salário minimo");
+        }
     }
 }
