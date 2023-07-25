@@ -28,6 +28,9 @@ public class Main {
         calcularAumento(funcionarios);
         System.out.println("----------------funcionarios agrupados por cargo----------------");
         mostrarFuncionariosPorCargos(agruparPorFuncao(funcionarios));
+        System.out.println("----------------funcionarios com aniversário nos mês 10 e 12----------------");
+        List<Funcionario> aniversariantes = Aniversariantes(funcionarios, 10,12);
+        mostraFuncionarios(aniversariantes);
     }
 
     private static void mostraFuncionarios(List<Funcionario> funcionarios) {
@@ -78,5 +81,20 @@ public class Main {
                 System.out.println("Nome: " + funcionario.getNome() + ", dataNascimento: " + funcionario.getDataNascimento() + ", Salario: " + funcionario.getSalario());
             }
         }
+    }
+
+    private static List<Funcionario> Aniversariantes(List<Funcionario> funcionarios, int... meses) {
+        List<Funcionario> aniversariantes = new ArrayList<>();
+
+        for (Funcionario funcionario: funcionarios) {
+            int mesAniversario = funcionario.getDataNascimento().getMonthValue();
+
+            for (int mes : meses) {
+                if (mesAniversario == mes) {
+                    aniversariantes.add(funcionario);
+                }
+            }
+        }
+        return aniversariantes;
     }
 }

@@ -8,6 +8,10 @@ public class Funcionario extends Pessoa {
     private String funcao;
     private BigDecimal salario;
 
+    public Funcionario(String nome, LocalDate dataNascimento) {
+        super(nome, dataNascimento);
+    }
+
     public Funcionario(String nome, LocalDate dataNascimento, String funcao, BigDecimal salario) {
         super(nome, dataNascimento);
         this.funcao = funcao;
